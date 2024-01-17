@@ -1,0 +1,30 @@
+# True for verbose output in terminal
+VERBOSE: True
+
+# Trajectory & parameter file name
+MD_TRAJECTORY_DATA_PATH:                # path to MD trajectory data
+MD_PARAMETER_DATA_PATH:                 # path to MD parameter
+
+# Directory names to store outputs
+DATA_DIR: data
+FIG_DIR: figures
+
+# Feature extraction parameters
+SUBSTRATE_NAME: SUB                   # Three letter substrate name in initial PDB file used for MD simulation
+SUB_AA_DIST: 4.0                      # Distance in angstrom to search for amino acids around substrate  
+TRAJ_DOWNSAMPLE_FACTOR: 50            # For finding for amino acids near substrate. As each frame is searched, downsampling decrease searched frames.
+VARIANCE_COVERAGE: .90                # For choosing percent variance coverage for dimensionality reduction in data preprocessing
+
+# Indicator data parameters
+HAS_INDICATOR: True                   # If True, use INDICATOR_PAIRS to get reaction indicator data else do PCA to get rmsd indicator data
+INDICATOR_PAIRS: [[8857,8861]]        # Atom pairs that can be used to indicate reaction probability (0 atom indexing*); 2 pairs ex) [[1,2],[3,4]]
+PCA_DOWNSAMPLE_FACTOR: 100            # When HAS_INDICATOR is False, PCA is done to calculate rmsd indicator data. Frames are downsampled for faster calculation.
+
+# HMM parameters
+SAMPLE_TP_LEN: 100                    # Number of timepoints of each sample
+N_TEST_SAMPLES: 250                   # Number of test samples. Number of train samples decided based on this value
+DO_HYPERPARAM_SEARCH: False           # If True, search optimal number of components, else use HMM_N_COMPONENTS
+HMM_N_COMPONENTS_LS: [8,9,10,11,12]   # Number of components for hyperparameter search 
+HMM_TRAIN_ITERATIONS: 100             # Number of iterations for training 
+HMM_N_COMPONENTS: 8                   # Number of components when DO_HYPERPARAM_SEARCH == False
+N_TEST_ITERATIONS: 50                 # Number of iterations for running HMM on best number of components using test data
