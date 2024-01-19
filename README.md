@@ -1,5 +1,4 @@
-> python 3.7.12
-> conda 23.11.0
+> python 3.7.12, conda 23.11.0
 ### Hidden Markov Model Guided Amino Acid Mutagenesis
 
 #### Running Python Script:
@@ -48,7 +47,7 @@ The aim is to exploit molecular dynamics (MD) data of enzyme-substrate complex a
 3. Score each hidden state using indicator data and get emission probabilities (means and standard deviations of features for all states) of the highest scoring hidden state.
 4.  Suggest AA substitution based on AA properties using the emission probabilities of the high scoring state.
 
-### Input: parameters.yml
+#### Input: parameters.yml
 Path to parameters.yml is passed on to main.py using the "-p" or "-parameter" flag. Below shows the description of the input parameters in parameters.yml file.
 ```
 # True for verbose output in terminal
@@ -83,7 +82,7 @@ HMM_N_COMPONENTS: Number of components to use when DO_HYPERPARAM_SEARCH is False
 N_TEST_ITERATIONS: Number of iterations for running HMM on test data to find high score frames.
 ```
 
-### Output: final_output.csv
+#### Output: final_output.csv
 1. Current Residue: original residue at the given residue index of FAP
 2. Nearby 3 substrate atoms: three substrate atoms closest to the
 current residue
@@ -92,7 +91,7 @@ residue_alphacarbon_to_atom_mean_distance, standard_deviation]
 3. AA Suggestion and Length: suggested amino acid and the suggested
 amino acid’s length
 
-### Pipeline Description
+#### Pipeline Description
 HMM is used to model the relationship of the active site and the substrate using distance measurements between them from the simulation. Time series distance data extracted from MD trajectory data is used to train Gaussian Emission HMM. 
 
 Features of the data consists of (a) the distances from the alpha-carbon of AA found near the substrate to each substrate atom and (b) the distance from side-chain hydrogen bond donor/acceptor atoms to substrate hydrogen bond donor/acceptor atoms. Test data is designed to be sampled at an even interval from beginning to end of MD trajectory in order to survery the entire trajectory data. 
@@ -123,8 +122,8 @@ When current residue is non-polar and\
 
 * bound = 1 standard deviation from mean
 
-### Notes
+#### Notes
 * hmm_guided_mutation script loads MD trajectory data and therefore could take up a lot of RAM.
 
-### License
+#### License
 * Project is available under the MIT license found in the LICENSE file.
