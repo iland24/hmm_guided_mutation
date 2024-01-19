@@ -644,7 +644,7 @@ def test_train_split(data, PARAM):
     
     # Choose test samples evenly throughout total MD timepoints
     if PARAM['N_TEST_SAMPLES'] > len(data_reshaped):
-        print(('Number of test samples should not be greater than number'
+        print(('Number of test samples should not be greater than number '
                'of total data samples.\nEither reduce the N_TEST_SAMPLES ' 
                'or reduce the N_SAMPLE_TIMEPOINTS'), end='\n\n')
         exit()
@@ -697,7 +697,7 @@ def hyperparameter_search(train_data, train_lengths, n_pc, PARAM):
         best_model = None
         for _ in range(10):
             # Create and fit the model
-            model = hmm.GaussianHMM(n_components=n_components, n_iter=PARAM['HMM_TRAIN_ITERATIONS'])
+            model = hmm.GaussianHMM(n_components=n_components, n_iter=PARAM['HMM_EM_ITERATIONS'])
             model.fit(train_data,train_lengths)
 
             # Evaluate model (replace with your own evaluation metric)
@@ -816,7 +816,7 @@ def run_hmm_to_find_high_score_frames(data, train_data, train_lengths, test_data
     high_sc_frames=[]
     for _ in range(PARAM['N_TEST_ITERATIONS']):
         # Using best hyperparam, fit hmm and get viterbi paths of test data
-        model = hmm.GaussianHMM(n_components=best_n_components, n_iter=PARAM['HMM_TRAIN_ITERATIONS'])
+        model = hmm.GaussianHMM(n_components=best_n_components, n_iter=PARAM['HMM_EM_ITERATIONS'])
         model.fit(train_data, train_lengths)
 
         # get state sequences for test data
